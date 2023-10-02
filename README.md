@@ -3,15 +3,15 @@
 Step 1: <br>
 Install python from this webiste: https://www.python.org/ <br>
 Install docker from this website: https://www.docker.com/ <br>
-Import confluent_kafka using command : pip install confluent_kafka <br>
+Import confluent_kafka using the command: pip install confluent_kafka <br>
 
 Step 2: <br>
 Go to the directory where you have cloned the project<br>
-Run the docker-compose.yml file, which help you in receivng the data using the command in linux : <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
-This will get the kafka, zookeeper started. Also producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
+Run the docker-compose.yml file, which will help you in receivng the data using the command in linux: <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
+This will get the kafka zookeeper started. Also the producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
 
 Step 3: <br>
-Execute the user-login-consumer.py file, from the same directory, you will be able to see that it is consuming the messages from the user-login topic. The code for this written in python  <br>
+Execute the user-login-consumer.py file. From the same directory, you will be able to see that it is consuming the messages from the user-login topic. The code for this is written in python  <br>
 
 #Flow Chart <br>
 <img width="470" alt="image" src="https://github.com/vijayrampatel/Data-pipeline-Kafka/assets/145386038/52db37eb-7b2c-4c36-a678-13fd01a4b576">
@@ -33,7 +33,7 @@ Step 6:<br>
 Execute the missing-data-login.py file using command(execute it from being into same directory):<br> python ./missing-dara-login.py <br>
 It will consume and show you all the users who aren't in iOS and android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the missing data users topic. <br>
 
-You can execute the all the steps simultaneously, step 4,5,6 will wait till the messages are pushed to the respective topic and will start printing the messages once the messages are in the partiton.
+You can execute the all the steps simultaneously, steps 4, 5, 6 will wait till the messages are pushed to the respective topic and will start printing the messages once the messages are in the partiton.
 
 
 
