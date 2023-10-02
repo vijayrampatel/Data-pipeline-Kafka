@@ -1,7 +1,7 @@
 # Data-pipeline-Kafka
 
 Step 1: <br>
-Install python from this webiste: https://www.python.org/ <br>
+Install python from this website: https://www.python.org/ <br>
 Install docker from this website: https://www.docker.com/ <br>
 Import confluent_kafka using the command: pip install confluent_kafka <br>
 
