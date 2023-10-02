@@ -21,6 +21,7 @@ Firstly we have imported the library, did the congifuration of the Kafka consume
 We have converted the string message coming from the producer into the dictionary to operate on it, we have used the if conditioning to filter the data and by using the key values concept in python and push it to the partiton using the producer<br>
 Converted the timestamp to the datetime<br>
 
+We have spreated data on the basis of 3 filter, and we can look into specific topic while looking for the information regarding the any specific type of user. For example : If we are looking for android users we can search for the information in the android-user-login topic <br>
 Step 4:<br>
 Execute the ios-user-login.py file using command(execute it from being into same directory):<br> python ./ios-user-login.py <br> 
 It will consume and show you only the iOS users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
