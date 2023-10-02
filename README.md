@@ -22,6 +22,12 @@ Converted the timestamp to the datetime<br>
 
 Step 4:<br>
 Execute the ios-user-login.py file using command: python ./ios-user-login.py <br>
+It will consume and show you only the iOS users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
+
+Step 5:<br>
+Execute the android-user-login.py file using command: python ./android-user-login.py <br>
+It will consume and show you only the android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
+
 
 
 
