@@ -13,6 +13,13 @@ Go to the directory where you have cloned the project<br>
 Run the docker-compose.yml file, which help you in receivng the data. using the command in linux : </b> docker-compose -f docker-compose.yml up -d </b> <br>
 This will get the kafka, zookeeper started. Also producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
 
+Step 3: <br>
+Execute the user-login-consumer.py file, from the same directory, you will be able to see that it is consuming the messages from the user-login topic. The code for this written in python  <br>
+
+Firstly we have imported the library, did the congifuration of the Kafka consumer, Producer, and created few kafka topics. <br>
+We have converted the string message coming from the producer into the dictionary to operate on it, we have used the if conditioning to filter the data and by using the key values concept in python.
+
+
 
 
 
