@@ -15,9 +15,14 @@ This will get the kafka, zookeeper started. Also producer will start sending mes
 
 Step 3: <br>
 Execute the user-login-consumer.py file, from the same directory, you will be able to see that it is consuming the messages from the user-login topic. The code for this written in python  <br>
-
+Code explanation<br>
 Firstly we have imported the library, did the congifuration of the Kafka consumer, Producer, and created few kafka topics. <br>
-We have converted the string message coming from the producer into the dictionary to operate on it, we have used the if conditioning to filter the data and by using the key values concept in python.
+We have converted the string message coming from the producer into the dictionary to operate on it, we have used the if conditioning to filter the data and by using the key values concept in python and push it to the partiton using the producer<br>
+Converted the timestamp to the datetime<br>
+
+Step4:<br>
+Execute the 
+
 
 
 
