@@ -22,6 +22,7 @@ We have converted the string message coming from the producer into the dictionar
 Converted the timestamp to the datetime<br>
 
 We have spreated data on the basis of 3 filter, and we can look into specific topic while looking for the information regarding the any specific type of user. For example : If we are looking for android users we can search for the information in the android-user-login topic <br>
+
 Step 4:<br>
 Execute the ios-user-login.py file using command(execute it from being into same directory):<br> python ./ios-user-login.py <br> 
 It will consume and show you only the iOS users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
