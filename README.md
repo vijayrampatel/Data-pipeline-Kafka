@@ -11,7 +11,7 @@ Import confluent_kafka using command : pip install confluent_kafka <br>
 
 Step 2: <br>
 Go to the directory where you have cloned the project<br>
-Run the docker-compose.yml file, which help you in receivng the data. using the command in linux : <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
+Run the docker-compose.yml file, which help you in receivng the data using the command in linux : <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
 This will get the kafka, zookeeper started. Also producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
 
 Step 3: <br>
@@ -23,12 +23,20 @@ We have converted the string message coming from the producer into the dictionar
 Converted the timestamp to the datetime<br>
 
 Step 4:<br>
-Execute the ios-user-login.py file using command(execute it from being into same directory): python ./ios-user-login.py <br> 
+Execute the ios-user-login.py file using command(execute it from being into same directory):<br> python ./ios-user-login.py <br> 
 It will consume and show you only the iOS users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
 
 Step 5:<br>
-Execute the android-user-login.py file using command(execute it from being into same directory): python ./android-user-login.py <br>
-It will consume and show you only the android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
+Execute the android-user-login.py file using command(execute it from being into same directory):<br> python ./android-user-login.py <br>
+It will consume and show you only the android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the android users topic. <br>
+
+Step 6:<br>
+Execute the missing-data-login.py file using command(execute it from being into same directory):<br> python ./missing-dara-login.py <br>
+It will consume and show you all the users who aren't in iOS and android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the missing data users topic. <br>
+
+You can execute the all the steps simultaneously, step 4,5,6 will wait till the messages are pushed to the respective topic and will start printing the messages once the messages are in the partiton.
+
+
 
 
 
