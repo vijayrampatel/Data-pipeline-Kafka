@@ -11,7 +11,7 @@ Import confluent_kafka using command : pip install confluent_kafka <br>
 
 Step 2: <br>
 Go to the directory where you have cloned the project<br>
-Run the docker-compose.yml file, which help you in receivng the data. using the command in linux : </b> docker-compose -f docker-compose.yml up -d </b> <br>
+Run the docker-compose.yml file, which help you in receivng the data. using the command in linux : <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
 This will get the kafka, zookeeper started. Also producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
 
 Step 3: <br>
