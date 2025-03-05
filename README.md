@@ -1,41 +1,136 @@
-# Data-pipeline-Kafka
+# Real-time User Login Data Pipeline with Kafka
 
-Step 1: <br>
-Install python from this website: https://www.python.org/ <br>
-Install docker from this website: https://www.docker.com/ <br>
-Import confluent_kafka using the command: pip install confluent_kafka <br>
+A Kafka-based real-time data pipeline that processes user login events, filters them by platform (iOS/Android), and handles missing data. Built using Python, Docker, and Confluent Kafka.
 
-Step 2: <br>
-Go to the directory where you have cloned the project<br>
-Run the docker-compose.yml file, which will help you in receivng the data using the command in linux: <br> </b> docker-compose -f docker-compose.yml up -d </b> <br>
-This will get the kafka zookeeper started. Also the producer will start sending messages to the user-login topic which is created in the docker-compose.yml file.
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)](https://www.python.org/)
+[![Kafka](https://img.shields.io/badge/Apache_Kafka-2.8+-red)](https://kafka.apache.org/)
 
-Step 3: <br>
-Execute the user-login-consumer.py file. From the same directory, you will be able to see that it is consuming the messages from the user-login topic. The code for this is written in python  <br>
+## Table of Contents
+- [FLow Chart] (#flowchart)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Data Flow](#data-flow)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-#Flow Chart <br>
+
+##Flow Chart <br>
 <img width="470" alt="image" src="https://github.com/vijayrampatel/Data-pipeline-Kafka/assets/145386038/52db37eb-7b2c-4c36-a678-13fd01a4b576">
 
-Code explanation<br>
-Firstly we have imported the library, did the congifuration of the Kafka consumer, Producer, and created few kafka topics. <br>
-We have converted the string message coming from the producer into the dictionary to operate on it, we have used the if conditioning to filter the data and by using the key values concept in python and push it to the partiton using the producer<br>
-Converted the timestamp to the datetime<br>
+## Features
+✔️ Real-time message streaming with Kafka  
+✔️ Automated Docker container setup  
+✔️ Data filtering by device type (iOS/Android)  
+✔️ Missing data handling  
+✔️ Multi-topic message routing  
 
-We have spreated data on the basis of 3 filter, and we can look into specific topic while looking for the information regarding the any specific type of user. For example : If we are looking for android users we can search for the information in the android-user-login topic <br>
+## Prerequisites
+- [Python 3.6+](https://www.python.org/)
+- [Docker](https://www.docker.com/) v20.10+
+- [Docker Compose](https://docs.docker.com/compose/) v1.29+
+- [pip](https://pip.pypa.io/en/stable/)
 
-Step 4:<br>
-Execute the ios-user-login.py file using command(execute it from being into same directory):<br> python ./ios-user-login.py <br> 
-It will consume and show you only the iOS users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the iOS users topic. <br>
+## Installation
 
-Step 5:<br>
-Execute the android-user-login.py file using command(execute it from being into same directory):<br> python ./android-user-login.py <br>
-It will consume and show you only the android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the android users topic. <br>
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/vijayrampatel/Data-pipeline-Kafka.git
+   cd Data-pipeline-Kafka
+   ```
 
-Step 6:<br>
-Execute the missing-data-login.py file using command(execute it from being into same directory):<br> python ./missing-dara-login.py <br>
-It will consume and show you all the users who aren't in iOS and android users which our code (user-login-consumer.py) filtered out from the user-login topic and pushed to the missing data users topic. <br>
+2. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-You can execute the all the steps simultaneously, steps 4, 5, 6 will wait till the messages are pushed to the respective topic and will start printing the messages once the messages are in the partiton.
+## Configuration
+
+### Environment Variables
+Create a `.env` file or modify `env.example` with the necessary configurations:
+
+```env
+KAFKA_BROKER="localhost:9092"
+MAIN_TOPIC="user-logins"
+IOS_TOPIC="ios-user-login"
+ANDROID_TOPIC="android-user-login"
+ERROR_TOPIC="missing-data-login"
+```
+
+### Kafka Topics Setup
+Ensure Kafka topics are set up correctly:
+```sh
+docker exec -it kafka kafka-topics --create --bootstrap-server localhost:9092 \
+--replication-factor 1 --partitions 1 --topic user-logins
+```
+
+## Usage
+
+### Start Kafka Infrastructure
+```sh
+docker-compose -f docker-compose.yml up -d
+```
+
+### Run the Consumers
+Run these in separate terminal windows:
+```sh
+python user-login-consumer.py  # Main consumer
+python ios-user-login.py       # iOS-specific consumer
+python android-user-login.py   # Android-specific consumer
+python missing-data-login.py   # Missing data handler
+```
+
+## Data Flow
+
+1. **Producer**: Generates simulated user login events with:
+   - User ID
+   - Device type
+   - Timestamp
+   - Location data
+
+2. **Main Consumer (`user-login-consumer.py`)**:
+   - Processes raw messages
+   - Routes data to appropriate topics:
+     - `ios-user-login`
+     - `android-user-login`
+     - `missing-data-login`
+
+3. **Platform Consumers**:
+   - Consume messages from respective topics and display results
+
+### Data Flow Diagram
+```mermaid
+graph TD;
+    A[Producer] -->|User Logins| B[Main Consumer]
+    B -->|iOS| C[iOS Consumer]
+    B -->|Android| D[Android Consumer]
+    B -->|Missing Data| E[Missing Data Handler]
+```
+
+## Project Structure
+```
+├── docker-compose.yml          # Kafka/Zookeeper configuration
+├── user-login-consumer.py      # Main processing logic
+├── ios-user-login.py           # iOS-specific consumer
+├── android-user-login.py       # Android-specific consumer
+├── missing-data-login.py       # Missing data handler
+├── requirements.txt            # Python dependencies
+└── README.md                   # Project documentation
+```
+
+## Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
 
