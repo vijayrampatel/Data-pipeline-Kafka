@@ -12,10 +12,9 @@ A Kafka-based data pipeline that processes user login events, filters them by pl
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
+- [Quick Start](#quick-start)
 - [Data Flow](#data-flow)
-- [Project Structure](#project-structure)
+- [Code Explanation](#code-explanation)
 - [License](#license)
 
 ## Features
